@@ -1,0 +1,107 @@
+﻿.nav_area{
+    display:flex;
+    flex-direction:row;
+    background-color:lightpink;
+    width:100vw;
+    height:15vh;
+}
+.nav_brand {
+    display: flex;
+    width: 50vw;
+    height: 100%;
+    align-items: center;
+    padding-left: 3vw;
+    font-family: "SarabunBold";
+    background-color: aquamarine;
+
+    a {
+        text-decoration: none;
+        color: black;
+        transition: all 0.1s ease;
+    }
+
+    a:hover {
+        color: black;
+        transform: scale(1.1,1.1);
+    }
+
+    
+}
+.nav_item {
+    display: flex;
+    width: 50vw;
+    height: 100%;
+    justify-content: flex-end;
+    font-family: "SarabunLight";
+    background-color: wheat;
+
+    .item {
+        display: flex;
+        width: 20%;
+        background-color: chocolate;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3vw;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        transition: all 0.1s ease;
+    }
+
+    a:hover {
+        color: black;
+        transform: scale(1.1,1.1);
+    }
+
+    .cata_area {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        background-color: forestgreen;
+        width: 20%;
+
+        .item {
+            position: absolute;
+            background-color: hotpink;
+            width: 100%;
+            height: 15vh;
+            font-size: 1.3vw;
+        }
+
+        
+    }
+
+    .logout {
+        display: flex;
+        width: 20%;
+        background-color: chocolate;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3vw;
+        font-family: "SarabunBold";
+        transition: all 0.1s ease;
+        color:snow;
+        cursor:pointer;
+    }
+
+    .logout:hover {
+        transform: scale(1.1,1.1);
+    }
+
+    .cata_area:hover {
+        .dropdown {
+            visibility: visible;
+        }
+    }
+}
+
+
+@media (min-width: 768px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+

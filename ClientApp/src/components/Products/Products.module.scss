@@ -1,0 +1,102 @@
+﻿.background {
+    display: flex;
+    width: 100vw;
+    height: 85vh;
+    background-color: darkslategrey;
+
+    &__sidebar {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        height: 100%;
+        background-color: forestgreen;
+
+        &__area {
+            display: flex;
+            width: 100%;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-size: 1.25vw;
+            color: white;
+            text-decoration: none;
+            transition: 0.1s all ease-in-out;
+
+            &--active {
+                @extend .background__sidebar__area;
+                transform: scale(1.5,1.5);
+                font-weight: bold;
+                transition: 0.1s all ease-in-out;
+            }
+
+            &--active a {
+                color: white;
+                text-decoration: none;
+            }
+        }
+
+        &__area a {
+            text-decoration: none;
+            color: white;
+        }
+    }
+
+    &__items {
+        width: 80%;
+        height: 100%;
+        background-color: cornflowerblue;
+        padding: 1vw;
+
+        &__area {
+            display: grid;
+            grid-template-columns: repeat(4,25%);
+            grid-template-rows: repeat(2,50%);
+            width: 100%;
+            height: 100%;
+            background-color: palevioletred;
+            overflow-y:scroll;
+
+            &__block {
+                border: 2px solid white;
+                display: flex;
+                flex-direction: column;
+                text-decoration: none;
+                color: white;
+                margin:0.5vw;
+                &__top {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content:center;
+                    width: 100%;
+                    height: 80%;
+                    text-decoration: none;
+                    color:white;
+                }
+
+                &__top img {
+                    object-fit:cover;
+                }
+
+                &__top:hover {
+                    color:inherit;
+                }
+
+                &__bottom {
+                    width: 100%;
+                    height: 20%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: black;
+                    padding: 0.5vw;
+                }
+            }
+        }
+    }
+}
+.active {
+    transform: scale(1.2,1.2);
+    font-weight: bold;
+}
