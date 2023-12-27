@@ -43,7 +43,7 @@ export default function Category() {
                 {sliceCategory.map((e) =>
                     <div className={styles["background__nav__child"]} key={e.id}>
                         <div>{e.category}</div>
-                        <div onClick={()=> deleteCategory(e.id) }>delete</div>
+                        <button onClick={()=> deleteCategory(e.id) }>delete</button>
                     </div>
                 )}
             </div>
