@@ -51,7 +51,7 @@ export default function EditCategory() {
             {item.map((e,index) => 
                 <div className={styles["background__edit"]} key={index}>
                     <div className={styles["background__edit__image"]}>
-                        <img src={e.path} alt="image" />
+                        <img src={e.imPath1} alt="image" />
                     </div>
                     <div className={styles["background__edit__detail"]}>
                         <div className={styles["background__edit__detail__area"]}>

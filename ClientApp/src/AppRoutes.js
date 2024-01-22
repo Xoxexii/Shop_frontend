@@ -1,10 +1,12 @@
-import  Category  from "./components/Category/Category";
+import Category from "./components/Category/Category";
 import { Navigate } from 'react-router-dom';
 import Home from "./components/Home";
 import Admin from "./components/Admin"
 import Manage from "./components/Manage/Manage";
 import EditCategory from "./components/Category/EditCategory";
 import Products from "./components/Products/Products";
+import ProductsDetail from "./components/Products/ProductsDetail";
+
 
 const login = sessionStorage.getItem("login")
 
@@ -23,8 +25,8 @@ const AppRoutes = [
     },
     
     {
-    path: '/products/:productsName',
-    element: <Products />
+    path: '/products/:productsCategory/:productsName/:productsId',
+        element: <ProductsDetail />
     },
   {
     path: '/category',

@@ -41,31 +41,39 @@ export default function Products() {
             <div className={styles["background__items"]}>
                 <div className={styles["background__items__area"]}>
                     {statusCategory == "" ? 
-                        items.map((e, index) =>
-                            <div className={styles["background__items__area__block"]} key={index}>
-                                <Link className={styles["background__items__area__block__top"]}>
-                                    <img src={e.path} alt="image" style={{ height: 20 + "vh", width: 50 + "%" }} loading="lazy" />
-                                    <div>{e.name}</div>
-                                    <div style={{ fontSize: 1.25 + "vw", transform: "translateY(-0vh)" }}>{e.price} บาท</div>
-                                </Link>
-                                <div className={styles["background__items__area__block__bottom"]}>
-                                    <small>ใส่ตะกร้า</small>
-                                    <small>{e.amount} ชิ้น</small>
+                        items.map((e, index) => {
+                            var routeItems = `/products/${e.category}/${e.name}/${e.id}`;
+                            return (
+                                <div className={styles["background__items__area__block"]} key={index}>
+                                    <Link className={styles["background__items__area__block__top"]} to={routeItems}>
+                                        <img src={e.imPath1} alt="image" style={{ height: 20 + "vh", width: 50 + "%" }} loading="lazy" />
+                                        <div>{e.name}</div>
+                                        <div style={{ fontSize: 1.25 + "vw", transform: "translateY(-0vh)" }}>{e.price} บาท</div>
+                                    </Link>
+                                    <div className={styles["background__items__area__block__bottom"]}>
+                                        <small>ใส่ตะกร้า</small>
+                                        <small>มี {e.amount} ชิ้น</small>
+                                    </div>
                                 </div>
-                            </div>
+                            )
+                        }
                         ) :
-                        filterItems.map((e, index) =>
-                            <div className={styles["background__items__area__block"]} key={index}>
-                                <Link className={styles["background__items__area__block__top"]}>
-                                    <img src={e.path} alt="image" style={{ height: 20 + "vh", width: 50 + "%" }} loading="lazy" />
-                                    <div>{e.name}</div>
-                                    <div style={{ fontSize: 1.25 + "vw", transform: "translateY(-1vh)" }}>{e.price} บาท</div>
-                                </Link>
-                                <div className={styles["background__items__area__block__bottom"]}>
-                                    <small>ใส่ตะกร้า</small>
-                                    <small>{e.amount} ชิ้น</small>
-                                </div>
-                            </div>
+                        filterItems.map((e, index) => {
+                            var routeItems = `/products/${e.category}/${e.name}/${e.id}`;
+                            return(
+                                <div className={styles["background__items__area__block"]} key={index}>
+                                    <Link className={styles["background__items__area__block__top"]} to={routeItems}>
+                                            <img src={e.path} alt="image" style={{ height: 20 + "vh", width: 50 + "%" }} loading="lazy" />
+                                            <div>{e.name}</div>
+                                            <div style={{ fontSize: 1.25 + "vw", transform: "translateY(-0vh)" }}>{e.price} บาท</div>
+                                    </Link>
+                                    <div className={styles["background__items__area__block__bottom"]}>
+                                        <small>ใส่ตะกร้า</small>
+                                        <small>มี {e.amount} ชิ้น</small>
+                                    </div>
+                    </div>
+                            )
+                        }
                         )
                 }
                 </div>

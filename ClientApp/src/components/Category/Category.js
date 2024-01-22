@@ -54,7 +54,7 @@ export default function Category() {
 
                     return (
                         <div className={styles["background__items__child"]} key={e.id}>
-                            <div className={styles["background__items__child__image"]}><img src={e.path} alt="image" /></div>
+                            <div className={styles["background__items__child__image"]}><img src={e.imPath1} alt="image" /></div>
                             <div className={styles["background__items__child__name"]}>{e.name}</div>
                             <div className={styles["background__items__child__amount"]}>{e.amount}</div>
                             <div className={styles["background__items__child__operation"]}>

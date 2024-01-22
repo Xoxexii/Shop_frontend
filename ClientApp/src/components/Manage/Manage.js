@@ -13,9 +13,13 @@ export default function Manage() {
     const [category, setCategory] = useState("");
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
+    const [describe, setDescribe] = useState("");
     const [amount, setAmount] = useState(0);
     const [token, setToken] = useState(sessionStorage.getItem("token"));
-    const [image, setImage] = useState("");
+    const [image1, setImage1] = useState("");
+    const [image2, setImage2] = useState("");
+    const [image3, setImage3] = useState("");
+    const [image4, setImage4] = useState("");
     const [lastimage, setLastImage] = useState("");
     const [form, setForm] = useState(null);
     const [listCategory, setListCategory] = useState([]);
@@ -42,7 +46,11 @@ export default function Manage() {
                 name: name,
                 price: price,
                 amount: amount,
-                image: fileURL,
+                describe: describe,
+                image1: image1,
+                image2: image2,
+                image3: image3,
+                image4: image4,
                 token: token
             }
             const response = await fetch("https://localhost:7067/api/additem", {
@@ -55,7 +63,7 @@ export default function Manage() {
                 //make sure to serialize your JSON body
                 body: JSON.stringify(obj)
             });
-
+            console.log(obj);
             const content = await response.json();
             await dispatch(addStatus(content));
             await setAmount(0);
@@ -75,6 +83,7 @@ export default function Manage() {
         
         setCategory("");
         setName("");
+        setDescribe("");
         setPrice(0);
         setAmount(0);
         window.location.reload();
@@ -83,13 +92,31 @@ export default function Manage() {
 
     const getFile = async (e) => {
         const files = e.target.files;
+        let form = new FormData()
+        for (let i = 0; i < files.length; i++) {
+            if (i == 0) {
+                await setImage1(files[i].name);
+            }
+            if (i == 1) {
+                await setImage2(files[i].name);
+            }
+            if (i == 2) {
+                await setImage3(files[i].name);
+            }
+            if (i == 3) {
+                await setImage4(files[i].name);
+            }
+            await form.append("file",files[i])
+        }
+        await setForm(form);
+            
+            
         
         
-        await setImage(URL.createObjectURL(files[0]))
         
-        await setFileURL(files[0].name)
-        await setFileType(files[0].type)
-        await setCropStatus(true);
+        
+        /*await setFileType(files[0].type)
+        await setCropStatus(true);*/
         
     }
 
@@ -127,7 +154,7 @@ export default function Manage() {
            
 
             const croppedImage = await getCroppedImg(
-                image,
+                image1,
                 cropAreaPixels,
 
             )
@@ -149,32 +176,14 @@ export default function Manage() {
             <div className={styles.manage_background}>
                 <form className={styles.form_background} onSubmit={(e) => addItem(e) }>
                     <div className={styles.form_left}>
-                        {cropStatus ?
-                            <>
-                            <div className={styles["crop__area"]}>
-                                <Cropper
-                                        image={image}
-                                        crop={crop}
-                                        zoom={zoom}
-                                        aspect={3 / 4}
-                                        onCropChange={setCrop}
-                                        onZoomChange={setZoom}
-                                        onCropComplete={onCropComplete}
-                                        
-                                    />
-                                    <div className={styles["button__area"]} onClick={() => showCroppedImage()}>crop</div>
-                            </div>
-                        <input type="file" accept="image/*" name="image" onChange={getFile} id="input_file" hidden required/>
-                        <div onClick={() => document.querySelector("#input_file").click()} className={styles.upload_file_button}>Upload</div>
-                        </>
-
-                        :
-                        <>
-                        <div>เลือกรูปภาพ</div>
-                        <input type="file" accept="image/*" name="image" onChange={getFile} id="input_file" hidden required/>
-                        <div onClick={() => document.querySelector("#input_file").click()} className={styles.upload_file_button}>Upload</div>
-                        </>
-                }
+                        
+                                <div>เลือกรูปภาพ</div>
+                                <input type="file" accept="image/*" name="image" onChange={getFile} id="input_file" hidden required multiple="multiple" />
+                                 <div onClick={() => document.querySelector("#input_file").click()} className={styles.upload_file_button}>Upload</div>
+                                {image1}
+                               
+                        
+                
                 </div>
                 <div className={styles.form_right}>
                     <div className={styles.form_right_input}>
@@ -196,16 +205,23 @@ export default function Manage() {
                         <div style={{ color: 'white' }}>ราคา</div>
                         <input type="number" placeholder="ใส่ราคา" name="price" className={styles.form_right_input_number} min="0" onChange={(e) => setPrice(e.target.value)} required/>
                     </div>
-                    <div className={styles.form_right_input}>
-                        <div style={{ color: 'white' }}> จำนวน</div>
-                            <div className={styles.form_right_input_amount}>
-                                <div className={styles.form_right_input_amount_decrease} onClick={(e) => setAmount((e) => e == 0 ? e = e : e - 1)}><CiSquareMinus /></div>
-                                <input className={styles.amount} type="number" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
-                                <div className={styles.form_right_input_amount_increase} onClick={() => setAmount((e) => e + 1)}><CiSquarePlus /></div>
+                     <div className={styles.form_right_input}>
+                            <div style={{ color: 'white' }}>คำบรรยายสินค้า</div>
+                            <div className={styles.form_right_input_text}>
+                                <textarea placeholder="ใส่คำบรรยาย" onChange={(e) => setDescribe(e.target.value)}></textarea>
                             </div>
-                            
-                    </div>
+
+                     </div>
                         <div className={styles.form_right_input_button}>
+                            <div className={styles.form_right_input} style={{ marginLeft: 2.5 + "vw", marginRight:2.5+"vw" }}>
+                                <div style={{ color: 'white'}}> จำนวน</div>
+                                <div className={styles.form_right_input_amount}>
+                                    <div className={styles.form_right_input_amount_decrease} onClick={(e) => setAmount((e) => e == 0 ? e = e : e - 1)}><CiSquareMinus /></div>
+                                    <input className={styles.amount} type="number" id="amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                                    <div className={styles.form_right_input_amount_increase} onClick={() => setAmount((e) => e + 1)}><CiSquarePlus /></div>
+                                </div>
+
+                            </div>
                             <button type="submit" className={styles.form_right_add_button}>เพิ่มสินค้า</button>
                     </div>
                 </div>

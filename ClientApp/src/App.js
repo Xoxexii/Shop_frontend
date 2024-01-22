@@ -4,7 +4,7 @@ import AppRoutes from './AppRoutes';
 import Layout from './components/Layout';
 import { useSelector, useDispatch } from 'react-redux';
 import { addStatus, addCategory, setItem, addCssCategory } from "../src/components/slice";
-import './custom.css';
+import './custom.module.css';
 
 export default function App() {
     const sliceCategory = useSelector((e) => e.admin.category);
@@ -15,6 +15,7 @@ export default function App() {
         const res = await fetch(`https://localhost:7067/api/getitem`);
         const contents = await res.json();
         dispatch(setItem(contents));
+        
 
     }
     const getCategory = async () => {
@@ -32,6 +33,8 @@ export default function App() {
         
             fetchItim();
             getCategory();
+        
+            
             
         
         
